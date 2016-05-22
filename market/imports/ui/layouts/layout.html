@@ -1,0 +1,18 @@
+<template name="layout">
+
+    {{> nav }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2">
+                <h3>Sub Nav</h3>
+            </div>
+            <div class="col-xs-6">
+                {{> yield }}
+            </div>
+            <div class="col-xs-4">
+                {{> yield "section"}}
+            </div>
+        </div>
+    </div>
+</template>
