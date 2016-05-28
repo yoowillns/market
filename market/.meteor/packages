@@ -30,3 +30,15 @@ twbs:bootstrap
 #Accounts
 accounts-password
 accounts-base
+
+#Notificaciones
+chrismbeckett:toastr
+
+#Sessiones
+session
+
+#Manejo de archivos
+cfs:filesystem
+cfs:standard-packages
+cfs:gridfs
+
