@@ -2,6 +2,28 @@
     <div id="content-dropzone">
         Arrastra las imagenes para subir...
         <div id="dropzone" class="{{dropStatus}}">
+            <ul class="row gallery">
+                {{#each allImages }}
+                    {{#unless this.isUploaded}}
+                        <li class="col-md-3 col-sm-6 col-xs-12">
+                            {{> FS.UploadProgressBar}}
+                        </li>
+                    {{ else }}
+                        <li class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="images">
+                                <img src="/cfs/files/images/{{_id}}" width="200px" alt="img" class="img-thumbnail image">
+                                <div class="controls">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-picture"></span></button>
+                                        {{#FS.DeleteButton class="btn btn-danger"}}<span class="glyphicon glyphicon-remove"></span>{{/FS.DeleteButton}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {{/unless}}
+                {{/each}}
+            </ul>
         </div>
     </div>
 </template>

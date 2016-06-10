@@ -12,10 +12,21 @@ import './dropzone.html';
 import './preview.html';
 //Crear las variables reactivas
 var images = new ReactiveVar();
+var limit = new ReactiveVar(0);
 //Configurar las notificaciones
 toastr.options = {
     "positionClass": "toast-bottom-right",
 }
+//Suscribir Images
+Template.dropzone.onCreated(function(){
+    Meteor.call('getImagesCount',function(err, count){
+        limit.set(count);
+    });
+    this.autorun(()=>{
+        this.subscribe('Images.all',limit.get());
+    });
+});
+
 //Crear la variable de session
 Template.dropzone.helpers({
     dropStatus:function () {
@@ -48,6 +59,7 @@ Template.dropzone.events({
                 else{
                     toastr.success("Se subio el archivo");
                     setTimeout(function(){
+                        limit.set(limit.get()+1);
                         var ruta = "/cfs/files/images/"+fileObj._id;
                         var html="<img src='"+ruta+"' class='img-thumbnail'>";
                         $("#preview-image").attr('src',ruta);
@@ -55,6 +67,11 @@ Template.dropzone.events({
                 }
             })
         })
+    },
+    'click .image':function(event){
+        event.preventDefault();
+        var ruta = "/cfs/files/images/"+this._id;
+        $("#preview-image").attr('src',ruta);
     }
 });
 

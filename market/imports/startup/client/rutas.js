@@ -23,7 +23,7 @@ FlowRouter.route('/', {
 FlowRouter.route('/images/', {
     name: 'images',
     action() {
-        BlazeLayout.render('layout', { main: 'dropzone',section :'preview' });
+        BlazeLayout.render('layout', { main: 'dropzone',section :'preview',subnav :'options' });
     }
 });
 //Ruta para el login

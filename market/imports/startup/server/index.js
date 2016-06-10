@@ -3,3 +3,5 @@
  */
 //Importar metodos del server
 import './methods.js';
+
+import './publications/images.js';

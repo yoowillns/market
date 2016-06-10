@@ -18,3 +18,9 @@ Images.allow({
         return true;
     }
 });
+
+Meteor.methods({
+    getImagesCount:function(){
+        return Images.find().count();
+    }
+});
