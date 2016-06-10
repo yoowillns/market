@@ -22,7 +22,9 @@ insecure                # Allow all DB writes from clients (for prototyping)
 
 
 #Routes
-iron:router
+#iron:router
+kadira:flow-router
+kadira:blaze-layout
 
 #Styles
 twbs:bootstrap
@@ -41,4 +43,5 @@ session
 cfs:filesystem
 cfs:standard-packages
 cfs:gridfs
+cfs:ui
 

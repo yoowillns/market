@@ -1,6 +1,7 @@
 /**
  * Created by Willians on 27/05/2016.
  */
+import {ReactiveVar} from 'meteor/reactive-var';
 import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 import {$} from 'meteor/jquery';
@@ -9,6 +10,8 @@ import {Images} from '../../api/images/images.js';
 //Importar templates
 import './dropzone.html';
 import './preview.html';
+//Crear las variables reactivas
+var images = new ReactiveVar();
 //Configurar las notificaciones
 toastr.options = {
     "positionClass": "toast-bottom-right",
@@ -17,6 +20,10 @@ toastr.options = {
 Template.dropzone.helpers({
     dropStatus:function () {
         return Session.get('dropStatus');
+    },
+    allImages:function (){
+        images.set(Images.find());
+        return images.get();
     }
 });
 //Eventos del template
@@ -44,7 +51,6 @@ Template.dropzone.events({
                         var ruta = "/cfs/files/images/"+fileObj._id;
                         var html="<img src='"+ruta+"' class='img-thumbnail'>";
                         $("#preview-image").attr('src',ruta);
-                        $("#dropzone").append(html);
                     },2000);
                 }
             })

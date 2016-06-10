@@ -2,16 +2,16 @@
 
     {{> nav }}
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-xs-2">
-                <h3>Sub Nav</h3>
+                {{> Template.dynamic template=subnav }}
             </div>
-            <div class="col-xs-6">
-                {{> yield }}
+            <div class="col-xs-7">
+                {{> Template.dynamic template=main }}
             </div>
-            <div class="col-xs-4">
-                {{> yield "section"}}
+            <div class="col-xs-3">
+                {{> Template.dynamic template=section }}
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@
     border: dashed 3px blue;
     background: white;
     margin: 5px;
+    padding: 10px;
 }
 #content-dropzone{
     background: cornflowerblue;
