@@ -72,6 +72,10 @@ Template.dropzone.events({
         event.preventDefault();
         var ruta = "/cfs/files/images/"+this._id;
         $("#preview-image").attr('src',ruta);
+    },
+    'click .remove':function (event){
+        event.preventDefault();
+        Images.remove(this._id);
     }
 });
 
