@@ -7,6 +7,7 @@ import {Meteor} from 'meteor/meteor';
 import {$} from 'meteor/jquery';
 //Importar images de la api
 import {Images} from '../../api/images/images.js';
+import {Orders} from '../../api/orders/orders.js';
 //Importar templates
 import './dropzone.html';
 import './preview.html';
@@ -33,7 +34,7 @@ Template.dropzone.helpers({
         return Session.get('dropStatus');
     },
     allImages:function (){
-        images.set(Images.find());
+        images.set(Images.find({state:false}));
         return images.get();
     }
 });
@@ -52,26 +53,27 @@ Template.dropzone.events({
         Session.set('dropStatus');
         FS.Utility.eachFile(event, function(file){
            var newFile = new FS.File(file);
+            //Creamos un nuevo campo en la imagen
+            newFile.state = false;
             Images.insert(newFile, function(error, fileObj){
                 if(error){
                     toastr.error("Error al subir la imagen");
                 }
                 else{
+                    //Si se sube la imagen creamos automaticamente un nueva orden vacia con el id de la imagen
+                    Orders.insert({
+                       image:fileObj._id,
+                        orders: [{
+                            text:'Ninguno',
+                        }]
+                    });
                     toastr.success("Se subio el archivo");
                     setTimeout(function(){
                         limit.set(limit.get()+1);
-                        var ruta = "/cfs/files/images/"+fileObj._id;
-                        var html="<img src='"+ruta+"' class='img-thumbnail'>";
-                        $("#preview-image").attr('src',ruta);
                     },2000);
                 }
             })
         })
-    },
-    'click .image':function(event){
-        event.preventDefault();
-        var ruta = "/cfs/files/images/"+this._id;
-        $("#preview-image").attr('src',ruta);
     },
     'click .remove':function (event){
         event.preventDefault();

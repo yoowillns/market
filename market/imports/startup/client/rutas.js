@@ -11,6 +11,7 @@ import '../../ui/user/register.js';
 import '../../ui/user/login.js';
 //importar templates de images
 import '../../ui/images/dropzone.js';
+import '../../ui/images/preview.js';
 
 //Ruta para el home
 FlowRouter.route('/', {
@@ -23,6 +24,13 @@ FlowRouter.route('/', {
 FlowRouter.route('/images/', {
     name: 'images',
     action() {
+        BlazeLayout.render('layout', { main: 'dropzone',section :'preview'});
+    }
+});
+//Ruta que recube el id de la imagen
+FlowRouter.route('/images/:id',{
+    name:'image',
+    action(){
         BlazeLayout.render('layout', { main: 'dropzone',section :'preview',subnav :'options' });
     }
 });

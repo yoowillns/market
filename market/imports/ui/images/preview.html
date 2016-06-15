@@ -1,7 +1,22 @@
 <template name="preview">
-    <img src="/preview.png" alt="preview-image" id="preview-image" class="img-responsive img-rounded" width="100%">
+    <img src="{{ getRuta }}" alt="preview-image" id="preview-image" class="img-responsive img-rounded" width="100%">
+    <div class="tags-container">
+        <h4>Opciones seleccionadas</h4>
+        <div class="tags">
+
+
+            {{#each i in getTags}}
+                {{i.text}}<br>
+            {{/each}}
+        </div>
+    </div>
 </template>
 
 <template name="options">
     <h3>Options</h3>
+    <div class="btn-group-vertical" role="group">
+        <buttom class="btn btn-success btn-sm" value="1">Blanco y Negro</buttom>
+        <buttom class="btn btn-success btn-sm" value="2">Recorte</buttom>
+        <buttom class="btn btn-success btn-sm" value="3">Contraste Alto</buttom>
+    </div>
 </template>

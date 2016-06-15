@@ -5,3 +5,4 @@
 import './methods.js';
 
 import './publications/images.js';
+import './publications/orders.js';
