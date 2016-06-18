@@ -5,11 +5,13 @@ import { Orders } from './orders.js';
 import { Meteor } from 'meteor/meteor';
 //Creamos un metodo que agrega una nueva orden a una imagen dado un id
 Meteor.methods({
-    addOrder:function(orderText, imageID){
+    addOrder:function(orderID,valor,orderText, imageID){
 
         Orders.update({image:imageID},{
             $push:{
                 orders:{
+                    id : orderID,
+                    valor:valor,
                     text: orderText
                 }
             }

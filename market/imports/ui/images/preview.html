@@ -1,22 +1,33 @@
 <template name="preview">
-    <img src="{{ getRuta }}" alt="preview-image" id="preview-image" class="img-responsive img-rounded" width="100%">
-    <div class="tags-container">
-        <h4>Opciones seleccionadas</h4>
-        <div class="tags">
-
-
-            {{#each i in getTags}}
-                {{i.text}}<br>
-            {{/each}}
+    <img src="{{ getRuta }}" alt="preview-image" id="preview-image" class="img-responsive img-thumbnail img-rounded" width="100%">
+    {{#if getState }}
+        <div class="monto">
+            <h4>Total: {{getPrecioTotal}} $</h4>
+            <a class="btn btn-danger buy">Registrar Pedido <span class="glyphicon glyphicon-shopping-cart"></span></a>
         </div>
-    </div>
+        <div class="tags-container">
+            <div class="tags">
+                <h4>Opciones registradas: {{getTags.orders.length}}</h4>
+                {{#each i in getTags.orders}}
+                    <span class="label label-success">
+                    {{i.text}}
+                        <a class="tag" idOrder="{{ getTags._id }}" id="{{ i.id }}" valor="{{ i.valor }}">
+                        <i class="glyphicon glyphicon-remove-sign"></i>
+                    </a>
+                </span>
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
 </template>
 
 <template name="options">
     <h3>Options</h3>
+    <label>Elige las opciones: </label>
     <div class="btn-group-vertical" role="group">
-        <buttom class="btn btn-success btn-sm" value="1">Blanco y Negro</buttom>
-        <buttom class="btn btn-success btn-sm" value="2">Recorte</buttom>
-        <buttom class="btn btn-success btn-sm" value="3">Contraste Alto</buttom>
+        <buttom class="btn btn-primary btn-sm" id="1" valor="20">Blanco y Negro</buttom><span>20$</span>
+        <buttom class="btn btn-primary  btn-sm" id="2" valor="10">Recorte</buttom><span>10$</span>
+        <buttom class="btn btn-primary  btn-sm" id="3" valor="80">Contraste Alto</buttom><span>80$</span>
+        <buttom class="btn btn-primary  btn-sm" id="4" valor="100">Quitar fondo</buttom><span>100$</span>
     </div>
 </template>

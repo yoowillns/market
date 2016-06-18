@@ -67,3 +67,60 @@
     margin-bottom: 5px;
     bottom: 0;
 }
+.tags{
+    margin-top: 5px;
+    border: solid 1px gainsboro;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+.tags>span{
+    font-size: 12px;
+    padding: 5px;
+    margin-top: 5px;
+    display: inline-block;
+}
+.tag{
+    color: green;
+}
+.tag:hover{
+    color: white;
+    cursor: pointer;
+}
+.monto{
+    border: solid 1px gainsboro;
+    padding: 5px;
+    margin-top: 5px;
+}
+.buy{
+    display: block;
+    width: auto;
+    margin: 0 auto;
+}
+/*---Perzonaliso los botones para crear etiquetas con los precios---*/
+.btn-group-vertical{
+    width: 100%;
+}
+.btn-group-vertical>.btn {
+    width: 70%;
+    float: left;
+}
+.btn-group-vertical>span{
+    background: mediumseagreen;
+    border: solid 1px green;
+    color: white;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 30%;
+    height: auto;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.btn-group-vertical > .btn:first-child:not(:last-child) {
+    border-top-right-radius: 0;
+}
+.btn-group-vertical > .btn:last-child:not(:first-child) {
+    border-bottom-right-radius: 0;
+}

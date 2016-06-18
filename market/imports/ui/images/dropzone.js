@@ -25,6 +25,8 @@ Template.dropzone.onCreated(function(){
     });
     this.autorun(()=>{
         this.subscribe('Images.all',limit.get());
+        //Subscribimos el metodo, para acceder a las ordenes
+        this.subscribe('Orders.all');
     });
 });
 
@@ -64,7 +66,9 @@ Template.dropzone.events({
                     Orders.insert({
                        image:fileObj._id,
                         orders: [{
-                            text:'Ninguno',
+                            id : '0',
+                            valor : 0,
+                            text:'Por defecto',
                         }]
                     });
                     toastr.success("Se subio el archivo");
@@ -77,7 +81,22 @@ Template.dropzone.events({
     },
     'click .remove':function (event){
         event.preventDefault();
-        Images.remove(this._id);
+        var idImage = this._id;
+        //Recuperamos el id de la Orden mediante la imagen que se eliminara (Importante tener subscrito la coleccion Orders - linea 29)
+        var idOrder=Orders.findOne({'image':idImage})._id;
+        Images.remove(idImage);
+        //Eliminamos la orden
+        Orders.remove(idOrder);
+        toastr.success("Se elimino la imagen");
+        if(FlowRouter.getParam('id')){
+            //Si estamos en la url de una imagen recuperamos el id
+            var idImageURL = FlowRouter.getParam('id');
+            if(idImage == idImageURL){
+                //Si el id de la imagen es el mismo de la url redireccionamos a la url images
+                FlowRouter.go('/images/');
+            }
+            //Si no son iguales lo mantenemos en la misma pagina ya que elimino otra imagen
+        }
     }
 });
 
