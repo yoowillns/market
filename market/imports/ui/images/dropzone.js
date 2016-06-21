@@ -12,6 +12,7 @@ import {Orders} from '../../api/orders/orders.js';
 import './dropzone.html';
 import './preview.html';
 //Crear las variables reactivas
+var dropStatus = new ReactiveVar('dropStatus');
 var images = new ReactiveVar();
 var limit = new ReactiveVar(0);
 //Configurar las notificaciones
@@ -33,7 +34,7 @@ Template.dropzone.onCreated(function(){
 //Crear la variable de session
 Template.dropzone.helpers({
     dropStatus:function () {
-        return Session.get('dropStatus');
+        return dropStatus.get();
     },
     allImages:function (){
         images.set(Images.find({state:false}));
@@ -44,15 +45,15 @@ Template.dropzone.helpers({
 Template.dropzone.events({
     'dragover #dropzone':function(event){
         event.preventDefault();
-        Session.set('dropStatus','active');
+        dropStatus.set('active')
     },
     'dragleave #dropzone':function(event){
         event.preventDefault();
-        Session.set('dropStatus');
+        dropStatus.set('dropStatus');
     },
     'drop #dropzone':function(event){
         event.preventDefault();
-        Session.set('dropStatus');
+        dropStatus.set('dropStatus');
         FS.Utility.eachFile(event, function(file){
            var newFile = new FS.File(file);
             //Creamos un nuevo campo en la imagen
